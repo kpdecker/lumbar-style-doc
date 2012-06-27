@@ -15,6 +15,9 @@
   "engines": {
     "node": ">=0.4.2"
   },
+  "dependencies": {
+    "marked": "~0.2"
+  },
   "devDependencies": {
     "mocha": "~1.2",
     "should": "~0.6"
