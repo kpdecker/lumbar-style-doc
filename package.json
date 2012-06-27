@@ -1,0 +1,18 @@
+{
+  "author": "Kevin Decker <kpdecker@gmail.com> (http://incaseofstairs.com)",
+  "name": "lumbar-style-doc",
+  "description": "Style documentation generation plugin for lumbar",
+  "keywords": [
+    "lumbar",
+    "build",
+    "module",
+    "documentation"
+  ],
+  "version": "0.0.1",
+  "repository": {
+    "url": "git://github.com/kpdecker/lumbar-style-doc.git"
+  },
+  "engines": {
+    "node": ">=0.4.2"
+  }
+}
