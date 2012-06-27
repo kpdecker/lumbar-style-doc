@@ -8,6 +8,11 @@ describe('live preview generator', function() {
           '<pre><code class="lang-html">&lt;div class=&quot;foo&quot;&gt;Test&lt;/div&gt;</code></pre>\n'
           + '<div class="style-doc-sample"><div class="foo">Test</div></div>');
     });
+    it('should create live preview for htm content', function() {
+      styleDoc('```htm\n<div class="foo">Test</div>```', {highlight: false}).should.equal(
+          '<pre><code class="lang-html">&lt;div class=&quot;foo&quot;&gt;Test&lt;/div&gt;</code></pre>\n'
+          + '<div class="style-doc-sample"><div class="foo">Test</div></div>');
+    });
 
     it('should highlight', function() {
       styleDoc('```html\n<div>Test</div>```', {}).should.equal(
