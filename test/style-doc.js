@@ -51,6 +51,14 @@ describe('live preview generator', function() {
     });
   });
 
+  describe('styles', function() {
+    it('should include css output within the document', function() {
+      styleDoc('```css\nfoo { bar: 1 }```', {highlight: false, template: ''}).should.equal(
+          '<pre><code class="lang-css">foo { bar: 1 }</code></pre>\n'
+          + '<style class="style-doc-sample">foo { bar: 1 }</style>');
+    });
+  });
+
   describe('unknown code', function() {
     it('should ignore code blocks without a language type', function() {
       styleDoc('```\n{{template "foo"}}```', {highlight: false, template: ''}).should.equal(
