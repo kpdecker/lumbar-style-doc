@@ -13,9 +13,9 @@ describe('file generator', function() {
   });
 
   it('should include sheet references', function() {
-    styleDoc('# test', {sheets: ['foo', 'bar']}).should.equal(
+    styleDoc('# test', {sheets: [{href: 'foo'}, {href: 'bar', media: 'foo'}]}).should.equal(
       '<!DOCTYPE html><html>'
-        + '<head><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"><link rel="stylesheet" href="foo"><link rel="stylesheet" href="bar"></head>'
+        + '<head><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"><link rel="stylesheet" href="foo"><link rel="stylesheet" href="bar" media="foo"></head>'
         + '<body><h1>test</h1>\n</body></html>');
   });
 });
