@@ -57,6 +57,17 @@ describe('live preview generator', function() {
           '<pre><code class="lang-css">foo { bar: 1 }</code></pre>\n'
           + '<style class="style-doc-sample">foo { bar: 1 }</style>');
     });
+
+    it('should include stylus output within the document', function() {
+      styleDoc('```stylus\nfoo\n  bar 1```', {highlight: false, template: ''}).should.equal(
+          '<pre><code class="lang-stylus">foo\n  bar 1</code></pre>\n'
+          + '<style class="style-doc-sample">foo {\n  bar: 1;\n}\n</style>');
+    });
+    it('should error on funky stylus', function() {
+      (function() {
+        styleDoc('```stylus\nfoo```', {highlight: false, template: ''});
+      }).should.throw();
+    });
   });
 
   describe('unknown code', function() {

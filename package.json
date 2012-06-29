@@ -18,7 +18,8 @@
   "dependencies": {
     "highlight.js": "~7.0",
     "jade": "~0.26",
-    "marked": "~0.2"
+    "marked": "~0.2",
+    "stylus": "~0.27"
   },
   "devDependencies": {
     "mocha": "~1.2",
