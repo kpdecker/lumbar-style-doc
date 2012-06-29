@@ -11,6 +11,13 @@ describe('file generator', function() {
   it('should output passed jade template', function() {
     styleDoc('# test', {template: '|foo !{content}'}).should.equal('foo <h1>test</h1>\n');
   });
+
+  it('should include sheet references', function() {
+    styleDoc('# test', {sheets: ['foo', 'bar']}).should.equal(
+      '<!DOCTYPE html><html>'
+        + '<head><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"><link rel="stylesheet" href="foo"><link rel="stylesheet" href="bar"></head>'
+        + '<body><h1>test</h1>\n</body></html>');
+  });
 });
 
 describe('live preview generator', function() {
