@@ -1,0 +1,18 @@
+{
+  "platforms": [ "bacon", "ribs" ],
+  "modules": {
+    "base": {
+      "styles": [
+        "base.styl"
+      ],
+      "static": [
+        {"style-doc": true, "src": "style-doc.md", "dest": "style-doc.html"}
+      ]
+    },
+    "items": {
+      "styles": [
+        "base.styl"
+      ]
+    }
+  }
+}
