@@ -71,16 +71,16 @@ describe('live preview generator', function() {
       styleDoc('```handlebars\n{{template "foo"}}\nbar```', {highlight: false, template: ''}).should.equal(
           '<pre><code class="lang-handlebars">{{template &quot;foo&quot;}}\nbar</code></pre>\n'
           + '<div id="handlebars-1" class="style-doc-sample"></div>\n'
-          + '<script>document.getElementById("handlebars-1").innerHTML = Handlebars.compile("{{template \\"foo\\"}}\\nbar")({});</script>');
+          + '<script>document.getElementById("handlebars-1").innerHTML = Handlebars.compile("{{template \\"foo\\"}}\\nbar")(context || {});</script>');
     });
     it('should create unique ids for each handlebars entry', function() {
       styleDoc('```handlebars\n{{template "foo"}}```\n```handlebars\n{{template "bar"}}```', {highlight: false, template: ''}).should.equal(
           '<pre><code class="lang-handlebars">{{template &quot;foo&quot;}}</code></pre>\n'
           + '<div id="handlebars-1" class="style-doc-sample"></div>\n'
-          + '<script>document.getElementById("handlebars-1").innerHTML = Handlebars.compile("{{template \\"foo\\"}}")({});</script>'
+          + '<script>document.getElementById("handlebars-1").innerHTML = Handlebars.compile("{{template \\"foo\\"}}")(context || {});</script>'
           + '<pre><code class="lang-handlebars">{{template &quot;bar&quot;}}</code></pre>\n'
           + '<div id="handlebars-2" class="style-doc-sample"></div>\n'
-          + '<script>document.getElementById("handlebars-2").innerHTML = Handlebars.compile("{{template \\"bar\\"}}")({});</script>');
+          + '<script>document.getElementById("handlebars-2").innerHTML = Handlebars.compile("{{template \\"bar\\"}}")(context || {});</script>');
     });
     it('should return the handlebars templates referenced', function() {
       styleDoc.findTemplates('```handlebars\n{{template "foo"}}```\n```handlebars\n{{template "bar"}}```')
