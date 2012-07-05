@@ -11,7 +11,6 @@ exports.canWatch = function() {
 
 exports.appendSpace = function(path) {
   setTimeout(function() {
-    console.error('append:', path);
     var fd = fs.openSync(path, 'a');
     fs.writeSync(fd, ' ');
     fs.closeSync(fd);
@@ -39,7 +38,6 @@ exports.runWatchTest = function(srcdir, config, operations, expectedFiles, optio
   var arise = lumbar.init(testdir + '/' + config, options);
   arise.on('output', function(status) {
     var statusFile = status.fileName.substring(outdir.length);
-    console.log('statusFile', statusFile);
     if (!expectedFiles.some(function(fileName) { return statusFile === fileName; })) {
       arise.unwatch();
       assert.fail(undefined, status.fileName,  'watchFile:' + statusFile + ': missing from expected list');
