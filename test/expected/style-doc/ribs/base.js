@@ -2955,9 +2955,3 @@ $(document).ready(function() {
   updateTab();
   $(window).bind('hashchange', updateTab);
 });
-;;
-base = (function() {
-var module = {exports: {}};
-var exports = module.exports;
-return module.exports;
-}).call(this);
