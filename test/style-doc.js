@@ -18,6 +18,18 @@ describe('file generator', function() {
         + '<head><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"><link rel="stylesheet" href="foo"><link rel="stylesheet" href="bar" media="foo"></head>'
         + '<body><h1>test</h1>\n</body></html>');
   });
+
+  it('should generate a tab for each h2 section', function() {
+    styleDoc('# The Doc\ncontent\n## test1\nfoo1\n## test2\n foo2\n').should.equal(
+      '<!DOCTYPE html><html>'
+        + '<head><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"></head>'
+        + '<body>'
+        + '<nav><button data-tab="#section-1">test1</button><button data-tab="#section-2">test2</button></nav>'
+        + '<h1>The Doc</h1>\n<p>content\n</p>\n'
+        + '<section id="section-1">\n<h1>test1</h1>\n<p>foo1\n</p>\n</section>\n'
+        + '<section id="section-2">\n<h1>test2</h1>\n<p> foo2\n</p>\n</section>\n'
+        + '</body></html>');
+  });
 });
 
 describe('live preview generator', function() {

@@ -5,4 +5,9 @@ html
     each sheet in sheets
       link(rel="stylesheet", href=sheet.href, media=sheet.media)
   body
+    if sections.length
+      nav
+        each section in sections
+          button(data-tab='#' + section.id) #{section.name}
+
     !{content}
