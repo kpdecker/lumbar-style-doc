@@ -5,3 +5,7 @@ Bacon ipsum dolor sit amet ut esse biltong, beef ribs duis in drumstick ex leber
 ```html
   <div></div>
 ```
+
+```handlebars
+  {{template "template"}}
+```
