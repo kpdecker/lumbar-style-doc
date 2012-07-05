@@ -66,6 +66,14 @@ describe('live preview generator', function() {
     });
   });
 
+  describe('javascript', function() {
+    it('should render javascript', function() {
+      styleDoc('```javascript\ncontext={"foo": "bar"};```', {highlight: false, template: ''}).should.equal(
+          '<pre><code class="lang-javascript">context={&quot;foo&quot;: &quot;bar&quot;};</code></pre>\n'
+          + '<script>context={"foo": "bar"};</script>');
+    });
+  });
+
   describe('handlebars', function() {
     it('should create rendering snippet for handlebars content', function() {
       styleDoc('```handlebars\n{{template "foo"}}\nbar```', {highlight: false, template: ''}).should.equal(
