@@ -2,36 +2,35 @@ var styleDoc = require('../lib/style-doc'),
     should = require('should');
 
 describe('file generator', function() {
+  const MARKDOWN = '# test';
+  const TEMPLATE_PREFIX = '<!DOCTYPE html><html>'
+        + '<head><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">';
+  const BODY = '</head><body><h1>test</h1>\n</body></html>';
+
   it('should output jade template', function() {
-    styleDoc('# test').should.equal(
-      '<!DOCTYPE html><html>'
-        + '<head><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"></head>'
-        + '<body><h1>test</h1>\n</body></html>');
+    styleDoc(MARKDOWN).should.equal(TEMPLATE_PREFIX + BODY);
   });
   it('should output passed jade template', function() {
-    styleDoc('# test', {template: '|foo !{content}'}).should.equal('foo <h1>test</h1>\n');
+    styleDoc(MARKDOWN, {template: '|foo !{content}'}).should.equal('foo <h1>test</h1>\n');
   });
 
   it('should include script references', function() {
-    styleDoc('# test', {scripts: ['foo', 'bar']}).should.equal(
-      '<!DOCTYPE html><html>'
-        + '<head><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">'
-        + '<script src="foo"></script><script src="bar"></script></head>'
-        + '<body><h1>test</h1>\n</body></html>');
+    styleDoc(MARKDOWN, {scripts: ['foo', 'bar']}).should.equal(
+      TEMPLATE_PREFIX
+        + '<script src="foo"></script><script src="bar"></script>'
+        + BODY);
   });
 
   it('should include sheet references', function() {
-    styleDoc('# test', {sheets: [{href: 'foo'}, {href: 'bar', media: 'foo'}]}).should.equal(
-      '<!DOCTYPE html><html>'
-        + '<head><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">'
-        + '<link rel="stylesheet" href="foo"><link rel="stylesheet" href="bar" media="foo"></head>'
-        + '<body><h1>test</h1>\n</body></html>');
+    styleDoc(MARKDOWN, {sheets: [{href: 'foo'}, {href: 'bar', media: 'foo'}]}).should.equal(
+      TEMPLATE_PREFIX
+        + '<link rel="stylesheet" href="foo"><link rel="stylesheet" href="bar" media="foo">'
+        + BODY);
   });
 
   it('should generate a tab for each h2 section', function() {
     styleDoc('# The Doc\ncontent\n## test1\nfoo1\n## test2\n foo2\n').should.equal(
-      '<!DOCTYPE html><html>'
-        + '<head><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"></head>'
+      TEMPLATE_PREFIX + '</head>'
         + '<body>'
         + '<nav><button data-tab="#section-1">test1</button><button data-tab="#section-2">test2</button></nav>'
         + '<h1>The Doc</h1>\n<p>content\n</p>\n'
