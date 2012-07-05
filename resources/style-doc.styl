@@ -1,0 +1,37 @@
+$contentPadding = 10px
+$dividerColor = #828282
+
+body > nav
+  background lightgray
+
+button[data-tab]
+  padding 0 $contentPadding
+  line-height 2em
+  border 1px solid $dividerColor
+
+  &.doc-active
+    font-weight bold
+    border-bottom none
+
+section.doc-tabbed
+  display none !important
+  margin $contentPadding
+
+  &.doc-active
+    display block !important
+
+  > pre
+    overflow auto !important
+    border 1px dotted $dividerColor !important
+
+.style-doc-sample
+  margin 0 (- $contentPadding)
+
+  &:after
+  &:before
+    content ''
+    display block
+    height 1px
+    margin $contentPadding
+    border none
+    background-image linear-gradient(left, #efefef, #ccc 50%, #efefef)
