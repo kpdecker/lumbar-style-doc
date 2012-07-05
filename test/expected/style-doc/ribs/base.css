@@ -151,11 +151,13 @@ button[data-tab] {
 }
 button[data-tab].doc-active {
   font-weight: bold;
-  border-bottom-color: #f8f8ff;
+  border-bottom-color: #fff;
+  background-color: #fff;
 }
 section.doc-tabbed {
   display: none !important;
   margin: 10px;
+  background-color: #fff;
 }
 section.doc-tabbed.doc-active {
   display: block !important;

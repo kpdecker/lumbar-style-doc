@@ -1,5 +1,6 @@
 $contentPadding = 10px
 $backgroundColor = #f8f8ff
+$contentBackground = white
 $dividerColor = #ccc
 $dividerBorder = 1px solid $dividerColor
 
@@ -15,11 +16,13 @@ button[data-tab]
 
   &.doc-active
     font-weight bold
-    border-bottom-color $backgroundColor
+    border-bottom-color $contentBackground
+    background-color $contentBackground
 
 section.doc-tabbed
   display none !important
   margin $contentPadding
+  background-color $contentBackground
 
   &.doc-active
     display block !important
