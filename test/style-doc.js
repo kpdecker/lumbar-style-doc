@@ -77,6 +77,10 @@ describe('live preview generator', function() {
           + '<div id="handlebars-2" class="style-doc-sample"></div>\n'
           + '<script>document.getElementById("handlebars-2").innerHTML = Handlebars.compile("{{template \\"bar\\"}}")({});</script>');
     });
+    it('should return the handlebars templates referenced', function() {
+      styleDoc.findTemplates('```handlebars\n{{template "foo"}}```\n```handlebars\n{{template "bar"}}```')
+          .should.eql(['foo', 'bar']);
+    });
   });
 
   describe('styles', function() {
