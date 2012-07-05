@@ -5,6 +5,9 @@ html
     each script in scripts
       script(src=script)
 
+    each template, name in templates
+      script Handlebars.templates["!{name}"] = Handlebars.compile("!{template}");
+
     each sheet in sheets
       link(rel="stylesheet", href=sheet.href, media=sheet.media)
   body

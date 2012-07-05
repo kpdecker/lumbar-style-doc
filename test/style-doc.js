@@ -27,6 +27,12 @@ describe('file generator', function() {
         + '<link rel="stylesheet" href="foo"><link rel="stylesheet" href="bar" media="foo">'
         + BODY);
   });
+  it('should include template references', function() {
+    styleDoc(MARKDOWN, {templates: {"ba\nr": 'as\"df'}}).should.equal(
+      TEMPLATE_PREFIX
+        + '<script>Handlebars.templates["ba\\nr"] = Handlebars.compile("as\\"df");</script>'
+        + BODY);
+  });
 
   it('should generate a tab for each h2 section', function() {
     styleDoc('# The Doc\ncontent\n## test1\nfoo1\n## test2\n foo2\n').should.equal(
