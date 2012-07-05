@@ -139,17 +139,19 @@ pre .chunk {
 pre .tex .formula {
   opacity: 0.5;
 }
-body > nav {
+body > nav,
+button[data-tab] {
   background: #f8f8ff;
+  border: 1px solid #ccc;
 }
 button[data-tab] {
   padding: 0 10px;
   line-height: 2em;
-  border: 1px solid #ccc;
+  margin-bottom: -1px;
 }
 button[data-tab].doc-active {
   font-weight: bold;
-  border-bottom: none;
+  border-bottom-color: #f8f8ff;
 }
 section.doc-tabbed {
   display: none !important;
