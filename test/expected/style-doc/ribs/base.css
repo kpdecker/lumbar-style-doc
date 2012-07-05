@@ -7,10 +7,15 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 
 */
 
-pre code {
-  display: block; padding: 0.5em;
+/* WARN: lumbar-style-doc customization */
+code {
   color: #000;
   background: #f8f8ff
+}
+
+pre code {
+  display: block;
+  padding: 0.5em;
 }
 
 pre .comment,
@@ -135,12 +140,12 @@ pre .tex .formula {
   opacity: 0.5;
 }
 body > nav {
-  background: #d3d3d3;
+  background: #f8f8ff;
 }
 button[data-tab] {
   padding: 0 10px;
   line-height: 2em;
-  border: 1px solid #828282;
+  border: 1px solid #ccc;
 }
 button[data-tab].doc-active {
   font-weight: bold;
@@ -153,9 +158,9 @@ section.doc-tabbed {
 section.doc-tabbed.doc-active {
   display: block !important;
 }
-section.doc-tabbed > pre {
+code {
   overflow: auto !important;
-  border: 1px dotted #828282 !important;
+  border: 1px solid #ccc !important;
 }
 .style-doc-sample {
   margin: 0 -10px;

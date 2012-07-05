@@ -4,10 +4,15 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 
 */
 
-pre code {
-  display: block; padding: 0.5em;
+/* WARN: lumbar-style-doc customization */
+code {
   color: #000;
   background: #f8f8ff
+}
+
+pre code {
+  display: block;
+  padding: 0.5em;
 }
 
 pre .comment,

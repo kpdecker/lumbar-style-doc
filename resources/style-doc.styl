@@ -1,8 +1,8 @@
 $contentPadding = 10px
-$dividerColor = #828282
+$dividerColor = #ccc
 
 body > nav
-  background lightgray
+  background #f8f8ff
 
 button[data-tab]
   padding 0 $contentPadding
@@ -20,9 +20,9 @@ section.doc-tabbed
   &.doc-active
     display block !important
 
-  > pre
-    overflow auto !important
-    border 1px dotted $dividerColor !important
+code
+  overflow auto !important
+  border 1px solid $dividerColor !important
 
 .style-doc-sample
   margin 0 (- $contentPadding)
