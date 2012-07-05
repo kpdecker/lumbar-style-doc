@@ -5,9 +5,7 @@
       "styles": [
         "base.styl"
       ],
-      "static": [
-        {"style-doc": true, "src": "style-doc.md", "dest": "style-doc.html"}
-      ]
+      "style-doc": {"src": "style-doc.md", "dest": "style-doc.html"}
     },
     "items": {
       "styles": [
