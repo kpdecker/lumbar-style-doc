@@ -5,4 +5,4 @@
 <pre><code class="lang-html">  <span class="tag">&lt;<span class="title">div</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre>
 <div class="style-doc-sample">  <div></div></div><pre><code class="lang-handlebars">  {{<span class="title">template</span> <span class="string">"template"</span>}}</code></pre>
 <div id="handlebars-1" class="style-doc-sample"></div>
-<script>document.getElementById("handlebars-1").innerHTML = Handlebars.compile("  {{template \"template\"}}")(context || {});</script></body></html>
+<script>document.getElementById("handlebars-1").innerHTML = Handlebars.template(precompiled!)(context || {});</script></body></html>

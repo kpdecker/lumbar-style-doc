@@ -1,4 +1,5 @@
-var styleDoc = require('../lib/style-doc'),
+var Handlebars = require('handlebars'),
+    styleDoc = require('../lib/style-doc'),
     should = require('should');
 
 describe('file generator', function() {
@@ -47,6 +48,17 @@ describe('file generator', function() {
 });
 
 describe('live preview generator', function() {
+  var precompile = Handlebars.precompile;
+
+  before(function() {
+    Handlebars.precompile = function() {
+      return 'precompiled!';
+    };
+  });
+  after(function() {
+    Handlebars.precompile = precompile;
+  });
+
   describe('html', function() {
     it('should create live preview for html content', function() {
       styleDoc('```html\n<div class="foo">Test</div>```', {highlight: false, template: ''}).should.equal(
@@ -79,16 +91,16 @@ describe('live preview generator', function() {
       styleDoc('```handlebars\n{{template "foo"}}\nbar```', {highlight: false, template: ''}).should.equal(
           '<pre><code class="lang-handlebars">{{template &quot;foo&quot;}}\nbar</code></pre>\n'
           + '<div id="handlebars-1" class="style-doc-sample"></div>\n'
-          + '<script>document.getElementById("handlebars-1").innerHTML = Handlebars.compile("{{template \\"foo\\"}}\\nbar")(context || {});</script>');
+          + '<script>document.getElementById("handlebars-1").innerHTML = Handlebars.template(precompiled!)(context || {});</script>');
     });
     it('should create unique ids for each handlebars entry', function() {
       styleDoc('```handlebars\n{{template "foo"}}```\n```handlebars\n{{template "bar"}}```', {highlight: false, template: ''}).should.equal(
           '<pre><code class="lang-handlebars">{{template &quot;foo&quot;}}</code></pre>\n'
           + '<div id="handlebars-1" class="style-doc-sample"></div>\n'
-          + '<script>document.getElementById("handlebars-1").innerHTML = Handlebars.compile("{{template \\"foo\\"}}")(context || {});</script>'
+          + '<script>document.getElementById("handlebars-1").innerHTML = Handlebars.template(precompiled!)(context || {});</script>'
           + '<pre><code class="lang-handlebars">{{template &quot;bar&quot;}}</code></pre>\n'
           + '<div id="handlebars-2" class="style-doc-sample"></div>\n'
-          + '<script>document.getElementById("handlebars-2").innerHTML = Handlebars.compile("{{template \\"bar\\"}}")(context || {});</script>');
+          + '<script>document.getElementById("handlebars-2").innerHTML = Handlebars.template(precompiled!)(context || {});</script>');
     });
     it('should return the handlebars templates referenced', function() {
       styleDoc.findTemplates('```handlebars\n{{template "foo"}}```\n```handlebars\n{{template "bar"}}```')

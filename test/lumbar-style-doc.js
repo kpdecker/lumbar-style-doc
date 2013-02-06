@@ -1,10 +1,22 @@
-var lib = require('../node_modules/lumbar/test/lib'),
+var Handlebars = require('handlebars'),
+    lib = require('../node_modules/lumbar/test/lib'),
     styleDoc = require('../lib/lumbar-style-doc'),
     watch = require('./lib/watch');
 
 styleDoc = styleDoc({});
 
 describe('config', function() {
+  var precompile = Handlebars.precompile;
+
+  before(function() {
+    Handlebars.precompile = function() {
+      return 'precompiled!';
+    };
+  });
+  after(function() {
+    Handlebars.precompile = precompile;
+  });
+
   it('should load markdown file from config',
     lib.runTest('test/artifacts/style-doc.json', 'test/expected/style-doc', {plugins: [styleDoc]}, '/**/*.{js,css,html}'));
 });
