@@ -33,7 +33,7 @@
   },
   "main": "lib/lumbar-style-doc",
   "scripts": {
-    "test": "node_modules/.bin/mocha"
+    "test": "node_modules/.bin/mocha --reporter spec"
   },
   "optionalDependencies": {}
 }
