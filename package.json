@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "glob": "~3.0",
-    "lumbar": "~1.0",
+    "lumbar": "*",
     "mocha": "~1.7.4",
     "should": "~0.6",
     "wrench": "~1.2"
