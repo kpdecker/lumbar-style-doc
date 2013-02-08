@@ -6,7 +6,7 @@ html
       script(src=script)
 
     each template, name in templates
-      script Handlebars.templates["!{name}"] = Handlebars.template(!{template});
+      script(type="style-doc") Handlebars.templates["!{name}"] = Handlebars.template(!{template});
 
     each sheet in sheets
       link(rel="stylesheet", href=sheet.href, media=sheet.media)
