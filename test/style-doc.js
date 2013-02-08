@@ -8,6 +8,18 @@ describe('file generator', function() {
         + '<head><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">';
   const BODY = '</head><body><h1>test</h1>\n</body></html>';
 
+
+  var precompile = Handlebars.precompile;
+
+  before(function() {
+    Handlebars.precompile = function() {
+      return 'precompiled!';
+    };
+  });
+  after(function() {
+    Handlebars.precompile = precompile;
+  });
+
   it('should output jade template', function() {
     styleDoc(MARKDOWN).should.equal(TEMPLATE_PREFIX + BODY);
   });
@@ -31,7 +43,7 @@ describe('file generator', function() {
   it('should include template references', function() {
     styleDoc(MARKDOWN, {templates: {"ba\nr": 'as\"df'}}).should.equal(
       TEMPLATE_PREFIX
-        + '<script type="style-doc">Handlebars.templates["ba\\nr"] = Handlebars.compile("as\\"df");</script>'
+        + '<script type="style-doc">Handlebars.templates["ba\\nr"] = Handlebars.template(precompiled!);</script>'
         + BODY);
   });
 
