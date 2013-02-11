@@ -1,5 +1,17 @@
 window.context = {};
 
+function highlightStyles(id, selector) {
+  var root = $('#style-doc-' + id),
+      highlight = $('<section class="style-doc-highlight">');
+
+  root.find(selector).each(function(index) {
+    var clone = root.clone();
+    clone.find(selector).eq(index).addClass('tap-highlight');
+    highlight.append(clone);
+  });
+  root.after(highlight);
+}
+
 $(document).ready(function() {
   Handlebars.templates = Handlebars.templates || {};
   Handlebars.registerHelper('template', function(name, options) {
