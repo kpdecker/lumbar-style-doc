@@ -31,8 +31,14 @@ code
   overflow auto !important
   border $dividerBorder !important
 
-.style-doc-sample
-  margin 0 (- $contentPadding)
+pre
+  display none
+
+  .show-code &
+    display block
+
+.style-doc-highlight
+  display none
 
   &:after
   &:before
@@ -42,3 +48,6 @@ code
     margin $contentPadding
     border none
     background-image linear-gradient(left, #efefef, #ccc 50%, #efefef)
+
+  .show-highlights &
+    display block

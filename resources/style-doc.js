@@ -22,6 +22,20 @@ $(document).ready(function() {
     }
   });
 
+  function toggle(name) {
+    var element = $('[name="' + name + '"]')
+        .on('change', function() {
+          var value = $('body').toggleClass(name).hasClass(name);
+          localStorage.setItem('style-doc-' + name, value);
+        });
+    if (localStorage.getItem('style-doc-' + name) === 'true') {
+      element.prop('checked', 'checked');
+      $('body').addClass(name);
+    }
+  }
+  toggle('show-code');
+  toggle('show-highlights');
+
   $('body > section').addClass('doc-tabbed');
 
   var tabs = $('[data-tab]').bind('click', function(event) {

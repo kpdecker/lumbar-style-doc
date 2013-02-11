@@ -16,4 +16,12 @@ html
         each section in sections
           button(data-tab='#' + section.id) #{section.name}
 
+    div
+      label
+        input(name="show-code", type="checkbox")
+        | Show code
+      label
+        input(name="show-highlights", type="checkbox")
+        | Show highlights
+
     !{content}
