@@ -6,7 +6,9 @@ describe('file generator', function() {
   const MARKDOWN = '# test';
   const TEMPLATE_PREFIX = '<!DOCTYPE html><html>'
         + '<head><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">';
-  const BODY = '</head><body><h1>test</h1>\n</body></html>';
+  const BODY = '</head><body>'
+      + '<div><label><input name="show-code" type="checkbox">Show code</label><label><input name="show-highlights" type="checkbox">Show highlights</label></div>'
+      + '<h1>test</h1>\n</body></html>';
 
 
   var precompile = Handlebars.precompile;
@@ -52,6 +54,7 @@ describe('file generator', function() {
       TEMPLATE_PREFIX + '</head>'
         + '<body>'
         + '<nav><button data-tab="#section-1">test1</button><button data-tab="#section-2">test2</button></nav>'
+        + '<div><label><input name="show-code" type="checkbox">Show code</label><label><input name="show-highlights" type="checkbox">Show highlights</label></div>'
         + '<h1>The Doc</h1>\n<p>content\n</p>\n'
         + '<section id="section-1">\n<h1>test1</h1>\n<p>foo1\n</p>\n</section>\n'
         + '<section id="section-2">\n<h1>test2</h1>\n<p> foo2\n</p>\n</section>\n'
@@ -75,18 +78,18 @@ describe('live preview generator', function() {
     it('should create live preview for html content', function() {
       styleDoc('```html\n<div class="foo">Test</div>```', {highlight: false, template: ''}).should.equal(
           '<pre><code class="lang-html">&lt;div class=&quot;foo&quot;&gt;Test&lt;/div&gt;</code></pre>\n'
-          + '<div class="style-doc-sample"><div class="foo">Test</div></div>');
+          + '<div id="style-doc-1" class="style-doc-sample"><div class="foo">Test</div></div>');
     });
     it('should create live preview for htm content', function() {
       styleDoc('```htm\n<div class="foo">Test</div>```', {highlight: false, template: ''}).should.equal(
           '<pre><code class="lang-html">&lt;div class=&quot;foo&quot;&gt;Test&lt;/div&gt;</code></pre>\n'
-          + '<div class="style-doc-sample"><div class="foo">Test</div></div>');
+          + '<div id="style-doc-1" class="style-doc-sample"><div class="foo">Test</div></div>');
     });
 
     it('should highlight', function() {
       styleDoc('```html\n<div>Test</div>```', {template: false}).should.equal(
           '<pre><code class="lang-html"><span class="tag">&lt;<span class="title">div</span>&gt;</span>Test<span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre>\n'
-          + '<div class="style-doc-sample"><div>Test</div></div>');
+          + '<div id="style-doc-1" class="style-doc-sample"><div>Test</div></div>');
     });
   });
 
@@ -102,17 +105,17 @@ describe('live preview generator', function() {
     it('should create rendering snippet for handlebars content', function() {
       styleDoc('```handlebars\n{{template "foo"}}\nbar```', {highlight: false, template: ''}).should.equal(
           '<pre><code class="lang-handlebars">{{template &quot;foo&quot;}}\nbar</code></pre>\n'
-          + '<div id="handlebars-1" class="style-doc-sample"></div>\n'
-          + '<script type="style-doc">document.getElementById("handlebars-1").innerHTML = Handlebars.template(precompiled!)(context || {});</script>');
+          + '<div id="style-doc-1" class="style-doc-sample"></div>\n'
+          + '<script type="style-doc">document.getElementById("style-doc-1").innerHTML = Handlebars.template(precompiled!)(context || {});</script>');
     });
     it('should create unique ids for each handlebars entry', function() {
       styleDoc('```handlebars\n{{template "foo"}}```\n```handlebars\n{{template "bar"}}```', {highlight: false, template: ''}).should.equal(
           '<pre><code class="lang-handlebars">{{template &quot;foo&quot;}}</code></pre>\n'
-          + '<div id="handlebars-1" class="style-doc-sample"></div>\n'
-          + '<script type="style-doc">document.getElementById("handlebars-1").innerHTML = Handlebars.template(precompiled!)(context || {});</script>'
+          + '<div id="style-doc-1" class="style-doc-sample"></div>\n'
+          + '<script type="style-doc">document.getElementById("style-doc-1").innerHTML = Handlebars.template(precompiled!)(context || {});</script>'
           + '<pre><code class="lang-handlebars">{{template &quot;bar&quot;}}</code></pre>\n'
-          + '<div id="handlebars-2" class="style-doc-sample"></div>\n'
-          + '<script type="style-doc">document.getElementById("handlebars-2").innerHTML = Handlebars.template(precompiled!)(context || {});</script>');
+          + '<div id="style-doc-2" class="style-doc-sample"></div>\n'
+          + '<script type="style-doc">document.getElementById("style-doc-2").innerHTML = Handlebars.template(precompiled!)(context || {});</script>');
     });
     it('should return the handlebars templates referenced', function() {
       styleDoc.findTemplates('```handlebars\n{{template "foo"}}```\n```handlebars\n{{template "bar"}}```')
